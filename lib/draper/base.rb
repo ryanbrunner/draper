@@ -101,9 +101,13 @@ module Draper
     #
     # @return [Object] proxy   
     def helpers
-      @helpers ||= ApplicationController::all_helpers
+      self.class.helpers
     end
     alias :h :helpers
+
+    def self.helpers
+      @helpers ||= ApplicationController::all_helpers
+    end
 
     # Calling `lazy_helpers` will make the built-in and
     # user-defined Rails helpers accessible as class methods
