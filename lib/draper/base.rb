@@ -1,8 +1,8 @@
 module Draper
   class Base
     require 'active_support/core_ext/class/attribute'
-    class_attribute :denied, :allowed, :model_class
-    attr_accessor :context, :model
+    class_attribute :denied, :allowed, :model_class, :context
+    attr_accessor :model
 
     DEFAULT_DENIED = Object.new.methods << :method_missing
     FORCED_PROXY = [:to_param]
@@ -24,7 +24,7 @@ module Draper
       input.inspect
       self.class.model_class = input.class if model_class.nil?
       @model = input
-      self.context = context
+      self.class.context = context
     end
 
     # Proxies to the class specified by `decorates` to automatically
